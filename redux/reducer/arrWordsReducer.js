@@ -35,7 +35,7 @@ const arrWordsReducer = (state = defaultArrWords, action) => {
   if (action.type === 'ADD_WORD') {
     return [
       {
-        id: state.arrWords.length + 1,
+        id: state.length + 1,
         en: action.en,
         vn: action.vn,
         memorized: false,

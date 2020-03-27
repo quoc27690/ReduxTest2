@@ -2,24 +2,19 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {connect} from 'react-redux';
+import {toggleShow, toggleMemorized} from '../../redux/actions';
 
 class Word extends Component {
   getMemorizedWord = () => {
-    this.props.dispatch({
-      type: 'TOGGLE_MEMORIZED',
-      id: this.props.myWord.id,
-    });
+    this.props.toggleMemorized(id);
   };
 
   getShowWord = () => {
-    this.props.dispatch({
-      type: 'TOGGLE_SHOW',
-      id: this.props.myWord.id,
-    });
+    this.props.toggleShow(id);
   };
 
   render() {
-    const {en, vn, memorized, isShow} = this.props.myWord;
+    const {en, vn, memorized, isShow, id} = this.props.myWord;
     const textDecorationLine = memorized ? 'line-through' : 'none';
     const textShowHide = isShow ? '-------' : vn;
     const memorizedButtonText = memorized ? 'Forget' : 'Memorized';
@@ -31,10 +26,12 @@ class Word extends Component {
         <View style={styles.controller}>
           <TouchableOpacity
             style={styles.button}
-            onPress={this.getMemorizedWord}>
+            onPress={() => this.props.toggleMemorized(id)}>
             <Text>{memorizedButtonText}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={this.getShowWord}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.props.toggleShow(id)}>
             <Text>{showButtonText}</Text>
           </TouchableOpacity>
         </View>
@@ -63,4 +60,4 @@ function mapStateToProps(state) {
   return {myFilter: state.filterStatus};
 }
 
-export default connect(mapStateToProps)(Word);
+export default connect(mapStateToProps, {toggleMemorized, toggleShow})(Word);

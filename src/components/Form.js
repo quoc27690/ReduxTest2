@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import {connect} from 'react-redux';
+import {addWord, togglePlus} from '../../redux/actions';
 
 class Form extends Component {
   constructor(props) {
@@ -21,11 +22,8 @@ class Form extends Component {
 
   onAdd = () => {
     const {en, vn} = this.state;
-    this.props.dispatch({
-      type: 'ADD_WORD',
-      en,
-      vn,
-    });
+    this.props.addWord(en, vn);
+    this.props.togglePlus();
   };
 
   render() {
@@ -66,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect()(Form);
+export default connect(null, {addWord, togglePlus})(Form);

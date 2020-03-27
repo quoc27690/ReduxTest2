@@ -9,5 +9,6 @@ const filterStatusReducer = (state = 'SHOW_ALL', action) => {
     default:
       break;
   }
+  return state;
 };
 export default filterStatusReducer;

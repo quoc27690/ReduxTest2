@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import {connect} from 'react-redux';
+import {togglePlus} from '../../redux/actions';
 
 class Header extends Component {
   render() {
@@ -18,7 +19,7 @@ class Header extends Component {
         <Text>My Word</Text>
         <TouchableOpacity
           onPress={() => {
-            this.props.dispatch({type: 'TOGGLE_PLUS'});
+            this.props.togglePlus();
           }}>
           <Text>+</Text>
         </TouchableOpacity>
@@ -27,4 +28,4 @@ class Header extends Component {
   }
 }
 
-export default connect()(Header);
+export default connect(null, {togglePlus})(Header);
