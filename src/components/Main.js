@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, TouchableOpacity} from 'react-native';
+import {View, FlatList} from 'react-native';
 
 import {connect} from 'react-redux';
 
@@ -34,7 +34,9 @@ class Main extends Component {
           <FlatList
             data={this.getWordList()}
             renderItem={({item}) => <Word myWord={item} />}
-            keyExtractor={item => item.id}
+            keyExtractor={item => {
+              item.id;
+            }}
           />
         </View>
         <Filter />
